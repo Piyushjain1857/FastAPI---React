@@ -10,5 +10,4 @@ class TransactionBase(BaseModel):
 class TransactionModel(TransactionBase):
     id: int
     class Config:
-        from_attributes = True # updated for pydantic v2 if needed, but keeping orm_mode for compatibility if they use v1
-        orm_mode = True
+        from_attributes = True

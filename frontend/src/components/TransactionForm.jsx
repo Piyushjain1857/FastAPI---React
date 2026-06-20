@@ -1,7 +1,8 @@
-import { useState } from 'react';
+/* eslint-disable react-hooks/set-state-in-effect */
+import { useState, useEffect } from 'react';
 import api from '../api';
 
-const TransactionForm = ({ fetchTransactions }) => {
+const TransactionForm = ({ onComplete, onCancel, currentTransaction }) => {
   const [formData, setFormData] = useState({
     amount: '',
     category: '',
@@ -9,6 +10,20 @@ const TransactionForm = ({ fetchTransactions }) => {
     is_income: false,
     date: ''
   });
+
+  useEffect(() => {
+    if (currentTransaction) {
+      setFormData(currentTransaction);
+    } else {
+      setFormData({
+        amount: '',
+        category: '',
+        description: '',
+        is_income: false,
+        date: ''
+      });
+    }
+  }, [currentTransaction]);
 
   const handleInputChange = (event) => {
     const value =
@@ -24,8 +39,30 @@ const TransactionForm = ({ fetchTransactions }) => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    await api.post('/transactions/', formData);
-    fetchTransactions();
+    try {
+      if (currentTransaction) {
+        await api.put(`/transactions/${currentTransaction.id}`, formData);
+      } else {
+        await api.post('/transactions/', formData);
+      }
+      
+      setFormData({
+        amount: '',
+        category: '',
+        description: '',
+        is_income: false,
+        date: ''
+      });
+      
+      if (onComplete) {
+        onComplete();
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleCancelClick = () => {
     setFormData({
       amount: '',
       category: '',
@@ -33,6 +70,9 @@ const TransactionForm = ({ fetchTransactions }) => {
       is_income: false,
       date: ''
     });
+    if (onCancel) {
+      onCancel();
+    }
   };
 
   return (
@@ -59,10 +99,15 @@ const TransactionForm = ({ fetchTransactions }) => {
 
       <div className="mb-3">
         <label htmlFor="date" className="form-label">Date</label>
-        <input type="text" className="form-control" id="date" name="date" value={formData.date} onChange={handleInputChange} />
+        <input type="date" className="form-control" id="date" name="date" value={formData.date} onChange={handleInputChange} />
       </div>
 
-      <button type="submit" className="btn btn-primary"> Submit </button>
+      <button type="submit" className="btn btn-primary"> 
+        {currentTransaction ? 'Update Transaction' : 'Submit'} 
+      </button>
+      <button type="button" className="btn btn-secondary ms-2" onClick={handleCancelClick}>
+        Cancel
+      </button>
     </form>
   );
 };
