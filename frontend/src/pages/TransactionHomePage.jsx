@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import api from '../api';
 import TransactionList from '../components/TransactionList';
 
-const HomePage = () => {
+const TransactionHomePage = () => {
   const [transactions, setTransactions] = useState([]);
   const navigate = useNavigate();
   const loadTransactions = async () => {
@@ -47,4 +47,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default TransactionHomePage;
