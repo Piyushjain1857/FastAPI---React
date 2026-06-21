@@ -7,7 +7,7 @@ import schemas
 
 # CRUD - Create, Read/readAll, Update, Delete
 router = APIRouter(
-    prefix="/transactions",
+    prefix="",
     tags=["transactions"],
 )
 
@@ -23,7 +23,7 @@ def get_db():
 db_dependency = Annotated[Session, Depends(get_db)]
 
 
-@router.post("/", response_model=schemas.TransactionModel)
+@router.post("/transactions", response_model=schemas.TransactionModel)
 async def create_transaction(transaction: schemas.TransactionBase, db: db_dependency):
     db_transaction = models.Transaction(
         **(
@@ -38,7 +38,7 @@ async def create_transaction(transaction: schemas.TransactionBase, db: db_depend
     return db_transaction
 
 
-@router.put("/{transaction_id}", response_model=schemas.TransactionModel)
+@router.put("/transactions/{transaction_id}", response_model=schemas.TransactionModel)
 async def update_transaction(
     transaction_id: int, transaction: schemas.TransactionBase, db: db_dependency
 ):
@@ -62,13 +62,13 @@ async def update_transaction(
     return db_transaction
 
 
-@router.get("/", response_model=List[schemas.TransactionModel])
+@router.get("/transactions", response_model=List[schemas.TransactionModel])
 async def read_transactions(db: db_dependency, skip: int = 0, limit: int = 100):
     transactions = db.query(models.Transaction).offset(skip).limit(limit).all()
     return transactions
 
 
-@router.get("/{transaction_id}", response_model=schemas.TransactionModel)
+@router.get("/transactions/{transaction_id}")
 async def read_transaction(db: db_dependency, transaction_id: int):
     transaction = (
         db.query(models.Transaction)
@@ -80,7 +80,7 @@ async def read_transaction(db: db_dependency, transaction_id: int):
     return transaction
 
 
-@router.delete("/{transaction_id}")
+@router.delete("/transactions/{transaction_id}")
 async def delete_transaction(db: db_dependency, transaction_id: int):
     transaction = (
         db.query(models.Transaction)
@@ -92,3 +92,7 @@ async def delete_transaction(db: db_dependency, transaction_id: int):
     db.delete(transaction)
     db.commit()
     return {"message": "Transaction deleted"}
+
+
+
+
