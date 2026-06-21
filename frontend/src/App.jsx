@@ -6,6 +6,7 @@ import ViewTransactionPage from './pages/ViewTransactionPage';
 import UsersPage from './pages/UsersPage';
 import AddEditUserPage from './pages/AddEditUserPage';
 import ViewUserPage from './pages/ViewUserPage';
+import LoginPage from "./pages/LoginPage";
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
       <Navbar />
       <div className="container">
         <Routes>
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/" />
           <Route path="/transaction" element={<TransactionsPage />} />
           <Route path="/transaction/add" element={<AddEditTransactionPage />} />
