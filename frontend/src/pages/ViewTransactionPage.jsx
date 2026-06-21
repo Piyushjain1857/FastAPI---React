@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import api from '../api';
 import TransactionDetails from '../components/TransactionDetails';
 
-const TransactionViewPage = () => {
+const ViewTransactionPage = () => {
   const { id } = useParams();
   const [transaction, setTransaction] = useState(null);
 
@@ -26,4 +26,4 @@ const TransactionViewPage = () => {
   );
 };
 
-export default TransactionViewPage;
+export default ViewTransactionPage;

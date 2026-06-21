@@ -1,11 +1,11 @@
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import TransactionHomePage from './pages/TransactionHomePage';
-import TransactionFormPage from './pages/TransactionFormPage';
-import TransactionViewPage from './pages/TransactionViewPage';
-import UserHomePage from './pages/UserHomePage';
-import UserFormPage from './pages/UserFormPage';
-import UserViewPage from './pages/UserViewPage';
+import TransactionsPage from './pages/TransactionsPage';
+import AddEditTransactionPage from './pages/AddEditTransactionPage';
+import ViewTransactionPage from './pages/ViewTransactionPage';
+import UsersPage from './pages/UsersPage';
+import AddEditUserPage from './pages/AddEditUserPage';
+import ViewUserPage from './pages/ViewUserPage';
 
 const App = () => {
   return (
@@ -13,15 +13,15 @@ const App = () => {
       <Navbar />
       <div className="container">
         <Routes>
-          <Route path="/" element={<TransactionHomePage />} />
-          <Route path="/transaction" element={<TransactionHomePage />} />
-          <Route path="/transaction/add" element={<TransactionFormPage />} />
-          <Route path="/transaction/edit/:id" element={<TransactionFormPage />} />
-          <Route path="/transaction/view/:id" element={<TransactionViewPage />} />
-          <Route path="/user" element={<UserHomePage />} />
-          <Route path="/user/add" element={<UserFormPage />} />
-          <Route path="/user/edit/:id" element={<UserFormPage />} />
-          <Route path="/user/view/:id" element={<UserViewPage />} />
+          <Route path="/" />
+          <Route path="/transaction" element={<TransactionsPage />} />
+          <Route path="/transaction/add" element={<AddEditTransactionPage />} />
+          <Route path="/transaction/edit/:id" element={<AddEditTransactionPage />} />
+          <Route path="/transaction/view/:id" element={<ViewTransactionPage />} />
+          <Route path="/user" element={<UsersPage />} />
+          <Route path="/user/add" element={<AddEditUserPage />} />
+          <Route path="/user/edit/:id" element={<AddEditUserPage />} />
+          <Route path="/user/view/:id" element={<ViewUserPage />} />
         </Routes>
       </div>
     </>

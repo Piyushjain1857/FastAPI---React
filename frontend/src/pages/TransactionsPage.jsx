@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import api from '../api';
 import TransactionList from '../components/TransactionList';
 
-const TransactionHomePage = () => {
+const TransactionsPage = () => {
   const [transactions, setTransactions] = useState([]);
   const navigate = useNavigate();
   const loadTransactions = async () => {
@@ -35,7 +35,7 @@ const TransactionHomePage = () => {
     <>
       <div className="d-flex justify-content-between align-items-center mt-4">
         <h2>Transactions</h2>
-        <button className="btn btn-success" onClick={() => navigate('/add')}>
+        <button className="btn btn-success" onClick={() => navigate('/transaction/add')}>
           Add Record
         </button>
       </div>
@@ -47,4 +47,4 @@ const TransactionHomePage = () => {
   );
 };
 
-export default TransactionHomePage;
+export default TransactionsPage;

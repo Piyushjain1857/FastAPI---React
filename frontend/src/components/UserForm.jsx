@@ -6,8 +6,8 @@ const UserForm = ({ onComplete, onCancel, currentUser }) => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
-        age: '',
-        address: ''
+        password: '',
+        role: ''
     });
 
     useEffect(() => {
@@ -17,8 +17,8 @@ const UserForm = ({ onComplete, onCancel, currentUser }) => {
             setFormData({
                 name: '',
                 email: '',
-                age: '',
-                address: ''
+                password: '',
+                role: ''
             });
         }
     }, [currentUser]);
@@ -47,8 +47,8 @@ const UserForm = ({ onComplete, onCancel, currentUser }) => {
             setFormData({
                 name: '',
                 email: '',
-                age: '',
-                address: ''
+                password: '',
+                role: ''
             });
 
             if (onComplete) {
@@ -61,11 +61,10 @@ const UserForm = ({ onComplete, onCancel, currentUser }) => {
 
     const handleCancelClick = () => {
         setFormData({
-            amount: '',
-            category: '',
-            description: '',
-            is_income: false,
-            date: ''
+            name: '',
+            email: '',
+            password: '',
+            role: ''
         });
         if (onCancel) {
             onCancel();

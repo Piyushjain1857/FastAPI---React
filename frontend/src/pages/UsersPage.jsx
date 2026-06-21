@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import api from '../api';
 import UserList from '../components/UserList';
 
-const UserHomePage = () => {
+const UsersPage = () => {
     const [users, setUsers] = useState([]);
     const navigate = useNavigate();
     const loadUsers = async () => {
@@ -47,4 +47,4 @@ const UserHomePage = () => {
     );
 };
 
-export default UserHomePage;
+export default UsersPage;

@@ -1,13 +1,9 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routers import users
-from routers import transactions
-from schemas import UserBase, TransactionBase
-from models import User, Transaction
+from routes import user_routes
+from routes import transaction_routes
 from database import SessionLocal, engine
-from database import engine
 import models
-from routers import transactions
 
 app = FastAPI()
 
@@ -26,5 +22,5 @@ app.add_middleware(
 
 models.Base.metadata.create_all(bind=engine)
 
-app.include_router(transactions.router)
-app.include_router(users.router)
+app.include_router(transaction_routes.router)
+app.include_router(user_routes.router)

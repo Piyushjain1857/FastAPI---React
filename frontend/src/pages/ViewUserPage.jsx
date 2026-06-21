@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import api from '../api';
 import UserDetails from '../components/UserDetails';
 
-const UserViewPage = () => {
+const ViewUserPage = () => {
     const { id } = useParams();
     const [user, setUser] = useState(null);
 
@@ -26,4 +26,4 @@ const UserViewPage = () => {
     );
 };
 
-export default UserViewPage;
+export default ViewUserPage;

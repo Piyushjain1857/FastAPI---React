@@ -4,7 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import api from '../api';
 import UserForm from '../components/UserForm';
 
-const UserFormPage = () => {
+const AddEditUserPage = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const [currentUser, setCurrentUser] = useState(null);
@@ -31,11 +31,11 @@ const UserFormPage = () => {
 
             <UserForm
                 currentUser={currentUser}
-                onComplete={() => navigate('/')}
-                onCancel={() => navigate('/')}
+                onComplete={() => navigate('/user')}
+                onCancel={() => navigate('/user')}
             />
         </div>
     );
 };
 
-export default UserFormPage;
+export default AddEditUserPage;

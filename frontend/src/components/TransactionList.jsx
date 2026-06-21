@@ -22,8 +22,8 @@ const TransactionList = ({ transactions, onDelete }) => {
             <td>{transaction.is_income ? 'Yes' : 'No'}</td>
             <td>{transaction.date}</td>
             <td>
-              <Link to={`/transactions/view/${transaction.id}`} className="btn btn-secondary btn-sm me-2" > View </Link>
-              <Link to={`/transactions/edit/${transaction.id}`} className="btn btn-info btn-sm me-2" > Edit </Link>
+              <Link to={`/transaction/view/${transaction.id}`} className="btn btn-secondary btn-sm me-2" > View </Link>
+              <Link to={`/transaction/edit/${transaction.id}`} className="btn btn-info btn-sm me-2" > Edit </Link>
               <button className="btn btn-danger btn-sm" onClick={() => onDelete(transaction.id)} > Delete</button>
             </td>
           </tr>

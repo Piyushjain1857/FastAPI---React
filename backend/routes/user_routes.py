@@ -22,7 +22,7 @@ def get_db():
 
 db_dependency = Annotated[Session, Depends(get_db)]
 
-@router.post("/users", response_model=schemas.UserModel)
+@router.post("/users/", response_model=schemas.UserModel)
 async def create_user(user: schemas.UserBase, db: db_dependency):
     db_user = models.User(
         **(user.model_dump() if hasattr(user, "model_dump") else user.dict())
@@ -33,13 +33,13 @@ async def create_user(user: schemas.UserBase, db: db_dependency):
     return db_user
 
 
-@router.get("/users", response_model=List[schemas.UserModel])
+@router.get("/users/", response_model=List[schemas.UserModel])
 async def read_users(db: db_dependency, skip: int = 0, limit: int = 100):
     users = db.query(models.User).offset(skip).limit(limit).all()
     return users
 
 
-@router.put("/{user_id}", response_model=schemas.UserModel)
+@router.put("/users/{user_id}", response_model=schemas.UserModel)
 async def update_user(user_id: int, user: schemas.UserBase, db: db_dependency):
     db_user = db.query(models.User).filter(models.User.id == user_id).first()
     if not db_user:
@@ -47,12 +47,13 @@ async def update_user(user_id: int, user: schemas.UserBase, db: db_dependency):
     db_user.name = user.name
     db_user.email = user.email
     db_user.password = user.password
+    db_user.role = user.role
     db.commit()
     db.refresh(db_user)
     return db_user
 
 
-@router.get("/user/{user_id}")
+@router.get("/users/{user_id}")
 async def read_user(db: db_dependency, user_id: int):
     user = db.query(models.User).filter(models.User.id == user_id).first()
     if not user:
@@ -67,4 +68,5 @@ async def delete_user(db: db_dependency, user_id: int):
         return {"message": "User not found"}
     db.delete(user)
     db.commit()
+    return {"message": "User deleted"}
 

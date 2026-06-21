@@ -4,7 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import api from '../api';
 import TransactionForm from '../components/TransactionForm';
 
-const TransactionFormPage = () => {
+const AddEditTransactionPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [currentTransaction, setCurrentTransaction] = useState(null);
@@ -38,4 +38,4 @@ const TransactionFormPage = () => {
   );
 };
 
-export default TransactionFormPage;
+export default AddEditTransactionPage;

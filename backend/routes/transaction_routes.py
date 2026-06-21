@@ -23,7 +23,7 @@ def get_db():
 db_dependency = Annotated[Session, Depends(get_db)]
 
 
-@router.post("/transactions", response_model=schemas.TransactionModel)
+@router.post("/transactions/", response_model=schemas.TransactionModel)
 async def create_transaction(transaction: schemas.TransactionBase, db: db_dependency):
     db_transaction = models.Transaction(
         **(
@@ -62,7 +62,7 @@ async def update_transaction(
     return db_transaction
 
 
-@router.get("/transactions", response_model=List[schemas.TransactionModel])
+@router.get("/transactions/", response_model=List[schemas.TransactionModel])
 async def read_transactions(db: db_dependency, skip: int = 0, limit: int = 100):
     transactions = db.query(models.Transaction).offset(skip).limit(limit).all()
     return transactions

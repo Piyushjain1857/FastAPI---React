@@ -14,7 +14,7 @@ const TransactionDetails = ({ transaction }) => {
         <p><strong>Description:</strong> {transaction.description}</p>
         <p><strong>Income?:</strong> {transaction.is_income ? 'Yes' : 'No'}</p>
         <p><strong>Date:</strong> {transaction.date}</p>
-        <Link to="/transactions" className="btn btn-secondary mt-3">Back to List</Link>
+        <Link to="/transaction" className="btn btn-secondary mt-3">Back to List</Link>
       </div>
     </div>
   );
