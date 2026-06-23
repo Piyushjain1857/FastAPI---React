@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from routes import login
 from routes import user_routes
 from routes import transaction_routes
 from database import SessionLocal, engine
@@ -24,3 +25,4 @@ models.Base.metadata.create_all(bind=engine)
 
 app.include_router(transaction_routes.router)
 app.include_router(user_routes.router)
+app.include_router(login.router)
